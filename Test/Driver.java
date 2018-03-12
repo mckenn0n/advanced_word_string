@@ -2,21 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-/* 
-Aussie Warren
-arwarre2@go.olemiss.edu
-Csci 211 Section 1
-Program 2: Wordchains
-Due: 10/15/2014
-Honor Code Statement: In keeping with the honor code policies of the University of 
-Mississippi, the School of Engineering, and the Department of Computer and Information 
-Science, I affirm that I have neither given nor received assistance on this programming 
-assignment. This assignment represents my individual, original effort. 
-... My Signature is on File. 
-Java 1.7
-This program finds the shortest wordchain between two words
-*/ 
-
 
 public class Driver {
 	private static Scanner scan = new Scanner(System.in);
