@@ -1,5 +1,6 @@
 import string
 import sys
+from multiprocessing import Process
 from queue import Queue
 
 def word_chain():
@@ -9,11 +10,6 @@ def word_chain():
 	fringe = Queue(len(dict_four))
 	visited = set()
 	found = False
-
-
-	if len(sys.argv) != 3:
-		print("Enter the a 'Start' word and 'End' word as command line arguments.")
-		sys.exit()
 
 	start = sys.argv[1]
 	end = sys.argv[2]
@@ -63,4 +59,18 @@ def word_chain():
 	print(chain,'\nThe word chain length form ' + start +' to ' + end +  ' is ' + str(len(chain)-1) + '.')
 
 if __name__ == '__main__':
-	word_chain()
+	if len(sys.argv) < 3 or len(sys.argv) > 4:
+		print("Enter the a 'Start' word and 'End' word as command line arguments.")
+		print("Optionally, you may enter a number of seconds you would like the program to try and find a complete word chain. (Default: 10)")
+		sys.exit()	
+	if len(sys.argv) == 4:
+		time_out = int(sys.argv[3])
+	else:
+		time_out = 10
+	p = Process(target=word_chain)
+	p.start()
+	p.join(time_out)
+	if p.is_alive():
+		print("Process took more than " + str(time_out) + " seconds. \nKilling process...")
+		p.terminate()
+		p.join()
