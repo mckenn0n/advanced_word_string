@@ -67,7 +67,7 @@ if __name__ == '__main__':
 		time_out = int(sys.argv[3])
 	else:
 		time_out = 10
-	p = Process(target=word_chain)
+	p = Process(target = word_chain)
 	p.start()
 	p.join(time_out)
 	if p.is_alive():

@@ -3,19 +3,26 @@ import sys
 from multiprocessing import Process
 from queue import Queue
 
+track = {}
+alpha = [x for x in string.ascii_lowercase[:26]]
+dict_three = [x[:-1] for x in open('../three_alpha.txt','r')]
+dict_four = [x[:-1] for x in open('../four_alpha.txt','r')]
+dict_five = [x[:-1] for x in open('../five_alpha.txt','r')]
+dict_full = set(dict_three + dict_four + dict_five)
+fringe = Queue(len(dict_full))
+visited = set()
+start = sys.argv[1]
+end = sys.argv[2]
+
+def reduce(word):
+	return
+
+def grow(word):
+	return
+
 def word_chain():
-	track = {}
-	alpha = [x for x in string.ascii_lowercase[:26]]
-	dict_three = [x[:-1] for x in open('../three_alpha.txt','r')]
-	dict_four = [x[:-1] for x in open('../four_alpha.txt','r')]
-	dict_five = [x[:-1] for x in open('../five_alpha.txt','r')]
-	dict_full = set(dict_three + dict_four + dict_five)
-	fringe = Queue(len(dict_full))
-	visited = set()
+
 	found = False
-	print(dict_full, len(dict_full))
-	start = sys.argv[1]
-	end = sys.argv[2]
 
 	if start == end:
 		print('The word chain length form ' + start +' to ' + end +  ' is 0.')
