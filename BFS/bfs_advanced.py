@@ -15,10 +15,47 @@ start = sys.argv[1]
 end = sys.argv[2]
 
 def reduce(word):
-	return
+	for i in range(len(word)):
+			new_word = list(word)
+			for rm in ['']:
+				new_word[i] = rm
+				tword = ''.join(new_word)
+				if tword in dict_full and tword not in visited:
+					fringe.put(tword)
+					visited.add(tword)
+					track[tword] = word
+					if tword == end:
+						return True
+	return False
 
 def grow(word):
-	return
+	for i in range(len(word)):
+			new_word = list(word)
+			for new_letter in alpha:
+				new_word.insert(i,new_letter)
+				tword = ''.join(new_word)
+				new_word = list(word)
+				if tword in dict_full and tword not in visited:
+					fringe.put(tword)
+					visited.add(tword)
+					track[tword] = word
+					if tword == end:
+						return True
+	return False
+
+def look(word):
+	for i in range(len(word)):
+				new_word = list(word)
+				for new_letter in alpha:
+					new_word[i] = new_letter
+					tword = ''.join(new_word)
+					if tword in dict_full and tword not in visited:
+						fringe.put(tword)
+						visited.add(tword)
+						track[tword] = word
+						if tword == end:
+							return True
+	return False
 
 def word_chain():
 
@@ -46,18 +83,24 @@ def word_chain():
 
 	while not found:
 		word = fringe.get()
-		for i in range(len(word)):
-			new_word = list(word)
-			for new_letter in alpha:
-				new_word[i] = new_letter
-				tword = ''.join(new_word)
-				if tword in dict_full and tword not in visited:
-					fringe.put(tword)
-					visited.add(tword)
-					track[tword] = word
-					if tword == end:
-						found = True
-						break
+		if len(word) == 4:
+			found = look(word)
+			if found:
+				break
+			grow(word)
+			reduce(word)
+		elif len(word) == 3:
+
+			look(word)
+			found = grow(word)
+			if found:
+				break
+		else:
+			look(word)
+			found = reduce(word)
+			if found:
+				break
+			
 	chain = []
 	p = end
 	while p != None:
