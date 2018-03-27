@@ -8,7 +8,11 @@ alpha = [x for x in string.ascii_lowercase[:26]]
 dict_three = [x[:-1] for x in open('../three_alpha.txt','r')]
 dict_four = [x[:-1] for x in open('../four_alpha.txt','r')]
 dict_five = [x[:-1] for x in open('../five_alpha.txt','r')]
-dict_full = set(dict_three + dict_four + dict_five)
+dict_three_two =[x[:-1] for x in open('../three_lc.txt','r')]
+dict_four_two =[x[:-1] for x in open('../four_lc.txt','r')]
+dict_five_two =[x[:-1] for x in open('../five_lc.txt','r')]
+dict_old_four =[x[:-1] for x in open('../three_lc.txt','r')]
+dict_full = set(dict_three + dict_four + dict_five + dict_old_four + dict_five_two + dict_four_two + dict_three_two)
 fringe = Queue(len(dict_full))
 visited = set()
 start = sys.argv[1]
@@ -29,7 +33,7 @@ def reduce(word):
 	return False
 
 def grow(word):
-	for i in range(len(word)):
+	for i in range(len(word)+1):
 			new_word = list(word)
 			for new_letter in alpha:
 				new_word.insert(i,new_letter)
@@ -90,7 +94,6 @@ def word_chain():
 			grow(word)
 			reduce(word)
 		elif len(word) == 3:
-
 			look(word)
 			found = grow(word)
 			if found:
